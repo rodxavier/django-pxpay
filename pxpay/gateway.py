@@ -153,14 +153,16 @@ class Gateway(object):
     def __init__(self, **kwargs):
         self.pxpay_url = 'https://sec2.paymentexpress.com/pxpay/pxaccess.aspx'
         try:
-            self.userid = kwargs.get('PXPAY_USERID',
-                                     getattr(settings, 'PXPAY_USERID'))
+            self.userid = kwargs.get('PXPAY_USERID')
+            if self.userid is None:
+                self.userid = getattr(settings, 'PXPAY_USERID')
         except AttributeError:
             raise KeyError('No PXPAY_USERID set. Please provide PXPAY_USERID \
                            as an argument or specify it in settings')
         try:
-            self.passkey = kwargs.get('PXPAY_KEY',
-                                      getattr(settings, 'PXPAY_KEY'))
+            self.passkey = kwargs.get('PXPAY_KEY')
+            if self.passkey is None:
+                self.passkey = getattr(settings, 'PXPAY_KEY')
         except AttributeError:
             raise KeyError('No PXPAY_KEY set. Please provide PXPAY_KEY as an \
                            argument or specify it in settings')
