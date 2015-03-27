@@ -151,7 +151,7 @@ class Gateway(object):
     """
 
     def __init__(self, **kwargs):
-        self.pxpay_url = 'https://sec2.paymentexpress.com/pxpay/pxaccess.aspx'
+        self.pxpay_url = 'https://sec.paymentexpress.com/pxaccess/pxpay.aspx'
         try:
             self.userid = kwargs.get('PXPAY_USERID')
             if self.userid is None:
