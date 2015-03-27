@@ -69,14 +69,6 @@ class Transaction(models.Model):
         # If no txn_id provided generate a new one.
         if not kwargs.get('TxnId'):
             kwargs['TxnId'] = self._generate_unique_txnid()
-        # Currency code must be provided
-        # either within transaction or in settings.py.
-        if not kwargs.get('CurrencyInput'):
-            try:
-                kwargs['CurrencyInput'] = getattr(settings, 'PXPAY_CURRENCY')
-            except AttributeError:
-                raise KeyError('No currency set. Please provide CurrencyInput \
-                               or specify PXPAY_CURRENCY in settings')
         return super(Transaction, self).__init__(*args, **kwargs)
 
     def __unicode__(self):
